@@ -1,4 +1,5 @@
-import '../../domain/entities/gyroscope.dart';
+
+import '../../../domain/entities/gyroscope.dart';
 
 abstract class GyroscopeState {}
 

@@ -30,6 +30,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
       );
       await _controller!.initialize();
     }
+    _controller!.setFlashMode(FlashMode.off);
     emit(
       BackCameraControllerAvailable(
         controller: _controller!,

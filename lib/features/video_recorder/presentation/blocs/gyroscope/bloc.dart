@@ -2,8 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gyro_video_recorder/features/video_recorder/domain/entities/gyroscope.dart';
 import 'package:gyro_video_recorder/features/video_recorder/domain/usecases/get_gyroscope_data.dart';
 
-import '../../../../core/usecases/usecase.dart';
-import 'bloc.dart';
+import '../../../../../core/usecases/usecase.dart';
+import '../bloc.dart';
 
 const double angleFix = 5.806451;
 

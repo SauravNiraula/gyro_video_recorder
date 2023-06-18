@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:gyro_video_recorder/features/video_recorder/presentation/pages/video_page.dart';
 
 import 'injection.dart';

@@ -1,6 +1,9 @@
-export 'gyroscope_events.dart';
-export 'gyroscope_bloc.dart';
-export 'gyroscpoe_states.dart';
-export 'camera_events.dart';
-export 'camera_bloc.dart';
-export 'camera_states.dart';
+export 'gyroscope/events.dart';
+export 'gyroscope/bloc.dart';
+export 'gyroscope/states.dart';
+export 'camera/events.dart';
+export 'camera/bloc.dart';
+export 'camera/states.dart';
+export 'interactive_image/events.dart';
+export 'interactive_image/bloc.dart';
+export 'interactive_image/states.dart';

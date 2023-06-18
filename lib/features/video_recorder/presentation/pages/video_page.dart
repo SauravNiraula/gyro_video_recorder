@@ -25,9 +25,10 @@ class _VideoPageState extends State<VideoPage> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => sl<GyroscopeBloc>()),
+        BlocProvider(create: (context) => sl<InteractiveImageBloc>()),
         BlocProvider(
-            create: (context) =>
-                sl<CameraBloc>()..add(GetBackCameraController())),
+          create: (context) => sl<CameraBloc>()..add(GetBackCameraController()),
+        ),
       ],
       child: Scaffold(
         body: BlocBuilder<CameraBloc, CameraState>(
@@ -38,30 +39,59 @@ class _VideoPageState extends State<VideoPage> {
                   child: Text('Loading camera'),
                 );
               case BackCameraControllerAvailable:
-                state = state as BackCameraControllerAvailable;
+                state as BackCameraControllerAvailable;
                 return Stack(
                   children: [
                     Center(child: CameraPreview(state.controller)),
                     Center(
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.1,
-                        width: double.infinity,
+                        height: 150,
+                        width: 150,
                         decoration: const BoxDecoration(
                           color: Color.fromARGB(131, 0, 0, 0),
                         ),
                       ),
                     ),
                     Center(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.1,
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(61, 0, 47, 255),
-                        ),
+                      child: BlocBuilder<InteractiveImageBloc, InteractiveImageState>(
+                        builder: (context, snapshot) {
+                          if(snapshot is LastAngles) {
+                            print(snapshot.angle);
+                            return Container(
+                              height: 150,
+                              width: 150,
+                              decoration: const BoxDecoration(
+                                color: Color.fromARGB(61, 0, 47, 255),
+                              ),
+                            );
+                          }
+                          return const SizedBox();
+                        }
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 100,
+                      right: 30,
+                      child: GestureDetector(
+                        onTap: () async{
+                          final image = await state.controller.takePicture();
+                          // ignore: use_build_context_synchronously
+                          BlocProvider.of<InteractiveImageBloc>(context).add(NewImage(image: image, angle: 0));
+                          // ignore: use_build_context_synchronously
+                          BlocProvider.of<GyroscopeBloc>(context).add(GetGyroscopeStream());
+                        },
+                        child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(999),
+                            ),
+                            child: const Icon(Icons.camera),),
                       ),
                     ),
                   ],
                 );
+
               default:
                 return const SizedBox();
             }
