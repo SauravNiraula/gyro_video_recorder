@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gyro_video_recorder/features/video_recorder/presentation/pages/video_page.dart';
 
+import 'features/video_recorder/presentation/pages/video_page.dart';
 import 'injection.dart';
 
 void main() async{
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
+    // ChangeNotifierProvider;
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
